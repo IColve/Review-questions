@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MainController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class MainController : MonoBehaviour
 		}
 	}
 	public Dictionary<int, Question> questionDic;
+
+	public UnityAction OnLoadEndAction;
 	
 	public void Read(string path)
 	{
@@ -25,18 +28,14 @@ public class MainController : MonoBehaviour
 		{
 			questionDic = new Dictionary<int, Question>();
 		}
+		questionDic.Clear();
 		
 		ReadExcel.Read(path).ForEach(x =>
 		{
 			questionDic.Add(x.id, x);
 		});
+		OnLoadEndAction.Invoke();
 	}
-	
-	
-	
-	
-	
-
 }
 
 [System.Serializable]

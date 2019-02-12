@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestionView : MonoBehaviour
+public class QuestionView : BaseCanvas
 {
+	public static QuestionView Create()
+	{
+		GameObject obj = Resources.Load<GameObject>("QuestionView");
+		return obj.GetComponent<QuestionView>();
+	}
+	
+	
+
 	[SerializeField] private GameObject defaultItem;
 
 	public void Show(List<Question> questionList)
@@ -19,7 +27,7 @@ public class QuestionView : MonoBehaviour
 			obj.transform.SetParent(defaultItem.transform.parent);
 			obj.transform.localScale = Vector3.one;
 			obj.SetActive(true);
-			obj.GetComponent<QuestionViewItem>().Init(x);
+			//obj.GetComponent<QuestionViewItem>().Init(x);
 		});
 	}
 	
