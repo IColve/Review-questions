@@ -13,10 +13,17 @@ public class MenuView : MonoBehaviour
 	private GameObject menuItem;
 	[SerializeField]
 	private Transform content;
+	[SerializeField]
+	private InputField searchInputField;
 	private void Awake()
 	{
 		instance = MainController.Instance;
+	}
+
+	private void Start()
+	{
 		instance.OnLoadEndAction = () => RefreshView();
+		searchInputField.onValueChanged.AddListener(Search);
 	}
 
 
@@ -37,7 +44,7 @@ public class MenuView : MonoBehaviour
 	}
 
 
-	public void RefreshView()
+	private void RefreshView()
 	{
 		for (int i = content.childCount - 1; i >= 0; i--)
 		{
@@ -51,5 +58,13 @@ public class MenuView : MonoBehaviour
 			obj.transform.localScale = Vector3.one;
 			obj.GetComponent<MenuViewItem>().Init(x);
 		});
+	}
+
+	private void Search(string str)
+	{
+		foreach (Transform tran in content)
+		{
+			tran.GetComponent<MenuViewItem>().Check(str);
+		}
 	}
 }

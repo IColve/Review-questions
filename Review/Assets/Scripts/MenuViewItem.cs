@@ -20,4 +20,15 @@ public class MenuViewItem : MonoBehaviour
 	{
 		answerText.gameObject.SetActive(!answerText.gameObject.activeSelf);
 	}
+
+	public void Check(string str)
+	{
+		if (string.IsNullOrEmpty(str))
+		{
+			gameObject.SetActive(true);
+			return;
+		}
+
+		gameObject.SetActive(titleText.text.Contains(str));
+	}
 }
