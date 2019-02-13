@@ -48,8 +48,8 @@ public class MenuView : MonoBehaviour
 		questions.ForEach(x =>
 		{
 			GameObject obj = Instantiate(menuItem, content);
-			menuItem.transform.localScale = Vector3.one;
-			menuItem.GetComponent<MenuViewItem>().Init(x);
+			obj.transform.localScale = Vector3.one;
+			obj.GetComponent<MenuViewItem>().Init(x);
 		});
 	}
 }

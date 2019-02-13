@@ -10,6 +10,7 @@ public class MenuViewItem : MonoBehaviour
 
 	public void Init(Question question)
 	{
+		transform.SetSiblingIndex(question.id);
 		titleText.text = question.id + ":" + question.title;
 		answerText.text = question.answer;
 		answerText.gameObject.SetActive(false);
@@ -18,14 +19,5 @@ public class MenuViewItem : MonoBehaviour
 	public void OnClick()
 	{
 		answerText.gameObject.SetActive(!answerText.gameObject.activeSelf);
-		GetComponentInChildren<ContentSizeFitter>().enabled = true;
-		GetComponent<ContentSizeFitter>().enabled = true;
-		Invoke("ClickEnd",0.02f);
-	}
-
-	private void ClickEnd()
-	{
-		GetComponentInChildren<ContentSizeFitter>().enabled = false;
-		GetComponent<ContentSizeFitter>().enabled = false;
 	}
 }
